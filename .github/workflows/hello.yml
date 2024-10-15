@@ -2,6 +2,7 @@ name: Hello
 on:
   pull_request:
     types: [opened, reopened]
+    paths: ['**.py']
 jobs:
   comment:
     runs-on: ubuntu-latest
@@ -10,6 +11,15 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      - run: gh pr comment "${GITHUB_HEAD_REF}" -b "Hello, ${GITHUB_ACTOR}!"
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - run: pip install -r requirements.txt
+      - name: Run flake8
+        id: flake8
+        run: flake8 .
+      - name: Comment
+        run: |
+          gh pr comment "${GITHUB_HEAD_REF}" -b "Hello, ${GITHUB_ACTOR}!"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
