@@ -1,9 +1,0 @@
-name: Schedule
-on:
-  schedule:
-    - cron: '0 0 * * *' # Run at midnight
-jobs:
-  schedule:
-    runs-on: ubuntu-latest
-    steps:
-      - run: date
