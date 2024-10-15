@@ -6,9 +6,16 @@ on:
         type: string
         default: Hello
         required: true
-        description: Acheerful word
+        description: A cheerful word
+      label:
+        type: choice
+        options:
+          - bug
+          - feature
+          - enhancement
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{ inputs.greeting }}"
+      - run: echo "${{ inputs.label }}"
