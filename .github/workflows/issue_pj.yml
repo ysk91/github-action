@@ -15,7 +15,7 @@ jobs:
           PROJECT_ID: PVT_kwHOBlW0YM4AqOrn
           STATUS_FIELD_ID: PVTSSF_lAHOBlW0YM4AqOrnzghgpf0
         run: |
-          issue_number="${{ github.event.issue.number }}"
+          issue_number="${{ github.event.issue.node_id }}"
 
           # アイテムをプロジェクトに追加
           result=$(gh api graphql -f query="
@@ -25,7 +25,7 @@ jobs:
                 id
               }
             }
-          }" -f projectId="$PROJECT_ID" -f issueId="gid://github.com/Issue/$issue_number" --jq '.data.addProjectV2ItemById.item.id')
+          }" -f projectId="$PROJECT_ID" -f issueId="$issue_number" --jq '.data.addProjectV2ItemById.item.id')
 
           # ステータスをTo Doに設定
           gh api graphql -f query="
