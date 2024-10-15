@@ -1,8 +1,8 @@
 name: Lint
-on:
-  pull_request:
-    types: [opened, ready_for_review]
-    paths: ['**.py', '.github/workflows/*.yml']
+on: push
+  # pull_request:
+  #   types: [opened, ready_for_review]
+  #   paths: ['**.py', '.github/workflows/*.yml']
 defaults:
   run:
     shell: bash
