@@ -2,7 +2,7 @@ name: Lint
 on:
   pull_request:
     types: [opened, ready_for_review]
-    paths: ['**.py']
+    paths: ['**.py', '.github/workflows/*.yml']
 defaults:
   run:
     shell: bash
