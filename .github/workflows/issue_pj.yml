@@ -16,5 +16,42 @@ jobs:
           # to the issue
           project-url: https://github.com/users/ysk91/projects/3
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-          # labeled: bug, needs-triage
-          # label-operator: OR
+      - name: Set project status to ToDo
+        uses: actions/github-script@v7.0.1
+        with:
+          script: |
+            const issueId = context.payload.issue.node_id;
+            const projectId = 'PVT_kwHOBlW0YM4AqOrn';
+            const fieldId = 'PVTSSF_lAHOBlW0YM4AqOrnzghgpf0';
+
+            try {
+              const itemId = await github.graphql(`
+                mutation($projectId: ID!, $contentId: ID!) {
+                  addProjectV2ItemById(input: {projectId: $projectId, contentId: $contentId}) {
+                    item {
+                      id
+                    }
+                  }
+                }
+              `, {
+                projectId: projectId,
+                contentId: issueId
+              }).then(res => res.addProjectV2ItemById.item.id);
+
+              await github.graphql(`
+                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $value: String!) {
+                  updateProjectV2ItemFieldValue(input: {projectId: $projectId, itemId: $itemId, fieldId: $fieldId, value: {text: $value}}) {
+                    projectV2Item {
+                      id
+                    }
+                  }
+                }
+              `, {
+                projectId: projectId,
+                itemId: itemId,
+                fieldId: fieldId,
+                value: "ToDo"
+              });
+            } catch (error) {
+              core.setFailed(`GraphQL request failed: ${error.message}`);
+            }
