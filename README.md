@@ -20,5 +20,24 @@
 
 ## 運用
 
+- issueの作成
+  - リポジトリからissueを作成する
+    - slackのワークフローから作れないかな？
+  - Projectに紐づけられるため、現在走っているタスクが分かる
+- issue一覧ページの操作
+  - 作成したissueの`開始日`と`完了日`を設定する
+  - issue内に要件、スケジュールを記載する
+  - エンジニア、QAも必要に応じてコメントを追加する
+- 実装〜リリース
+  - 今まで通り
+- issueのStatusを`Done`にする
+  - issueが自動でアーカイブされ、一覧から消える
+  - issue自体は残るため、リポジトリから確認できる
+
+
+### 参考
+
 - Github Projectsとタスクリストでissue管理を試行錯誤しているPMの話
   - https://zenn.dev/ncdc/articles/55cc05c1a65292
+- プロジェクト管理ツールとしてGitHubを"普通に"使う
+  - https://qiita.com/itkr/items/0d4c0015da28827b2bb7
