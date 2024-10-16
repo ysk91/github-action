@@ -1,3 +1,7 @@
+---
+status: 'ToDo'
+---
+
 issue一覧: https://github.com/users/ysk91/projects/3
 
 ## 要件

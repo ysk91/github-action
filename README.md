@@ -10,6 +10,8 @@
   - https://github.com/actions/runner-images
 - actionsのマーケットプレイス
   - https://github.com/marketplace?type=actions
+- issueテンプレート
+  - https://docs.github.com/ja/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository
 
 ## actions
 
