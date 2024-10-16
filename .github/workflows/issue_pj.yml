@@ -1,57 +1,20 @@
-name: Link to Project
+name: Add issue to project
+
 on:
   issues:
-    types: [opened]
-defaults:
-  run:
-    shell: bash
+    types:
+      - opened
+
 jobs:
-  manage_issue:
+  add-to-project:
+    name: Add issue to project
     runs-on: ubuntu-latest
     steps:
-      - name: Link Issue to GitHub Project
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROJECT_ID: PVT_kwHOBlW0YM4AqOrn
-          STATUS_FIELD_ID: PVTSSF_lAHOBlW0YM4AqOrnzghgpf0
-        run: |
-          issue_number="${{ github.event.issue.node_id }}"
-
-          # アイテムをプロジェクトに追加
-          result=$(gh api graphql -f query="
-          mutation(\$projectId: ID!, \$issueId: ID!) {
-            addProjectV2ItemById(input: {projectId: \$projectId, contentId: \$issueId}) {
-              item {
-                id
-              }
-            }
-          }" -f projectId="$PROJECT_ID" -f issueId="$issue_number" --jq '.data.addProjectV2ItemById.item.id')
-
-          # ステータスをTo Doに設定
-          gh api graphql -f query="
-          mutation(\$itemId: ID!, \$fieldId: ID!, \$value: String!) {
-            updateProjectV2ItemFieldValue(input: {projectId: \$projectId, itemId: \$itemId, fieldId: \$fieldId, value: \$value}) {
-              projectV2Item {
-                id
-              }
-            }
-          }" -f projectId="$PROJECT_ID" -f itemId="$result" -f fieldId="$STATUS_FIELD_ID" -f value="To Do" --header "Authorization: bearer $GITHUB_TOKEN"
-
-      - name: Comment for Requirement
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          issue_number="${{ github.event.issue.number }}"
-          gh issue comment "$issue_number" --body "## 要件\n\n### 資料"
-      - name: Comment for Engineering
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          issue_number="${{ github.event.issue.number }}"
-          gh issue comment "$issue_number" --body "## 実装\n\n### 実装前メモ"
-      - name: Comment for QA
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          issue_number="${{ github.event.issue.number }}"
-          gh issue comment "$issue_number" --body "## QA\n\n### テスト仕様書"
+      - uses: actions/add-to-project@v1.0.2
+        with:
+          # You can target a project in a different organization
+          # to the issue
+          project-url: https://github.com/users/ysk91/projects/3
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: bug, needs-triage
+          label-operator: OR
