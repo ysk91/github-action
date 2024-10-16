@@ -1,4 +1,5 @@
 ---
+labels: '運用'
 status: 'ToDo'
 ---
 
