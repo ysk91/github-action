@@ -1,15 +1,25 @@
 ---
 name: issue template
 about: issue template
-labels: '運用'
-status: 'ToDo'
+labels: 運用
+status: ToDo
 ---
 
 ## 要件
 
 
-### 資料（PM）
+### 資料
 
+
+### スケジュール
+
+- [ ] 要件定義       :
+- [ ] 要件Fix       :
+- [ ] 開発          :
+- [ ] テストレビュー  :
+- [ ] QA            :
+- [ ] UAT           :
+- [ ] リリース       :
 
 ## エンジニア
 
