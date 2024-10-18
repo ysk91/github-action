@@ -1,8 +1,8 @@
 ---
-name: "issue template"
-about: "issue template"
+name: "issue template.md"
+about: "マークダウンで書くタイプです"
 labels: 運用
-status: ToDo
+projects: "ysk91/3"
 ---
 
 ## 要件
@@ -35,4 +35,4 @@ status: ToDo
 
 ## その他
 
-- issue一覧: https://github.com/users/ysk91/projects/3
+
