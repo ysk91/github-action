@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Issue一覧
+    url: https://github.com/users/ysk91/projects/3
+    about: issueを作成するとここに表示されます。

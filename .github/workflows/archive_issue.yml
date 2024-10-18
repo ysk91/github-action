@@ -1,0 +1,54 @@
+name: Archive Done Issues
+
+on:
+  issues:
+    types:
+      - edited
+
+jobs:
+  archive-done-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if issue status is Done
+        uses: actions/github-script@v7.0.1
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const issueId = issue.node_id;
+            const projectId = 'PVT_kwHOBlW0YM4AqOrn'; // プロジェクトのIDを設定
+            const fieldId = 'PVTSSF_lAHOBlW0YM4AqOrnzghgpf0'; // ステータスフィールドのIDを設定
+
+            const status = await github.graphql(`
+              query($projectId: ID!, $itemId: ID!, $fieldId: ID!) {
+                node(id: $projectId) {
+                  ... on ProjectV2 {
+                    item(id: $itemId) {
+                      fieldValueByName(name: "Status") {
+                        ... on ProjectV2ItemFieldSingleSelectValue {
+                          name
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `, {
+              projectId: projectId,
+              itemId: issueId,
+              fieldId: fieldId
+            }).then(res => res.node.item.fieldValueByName.name);
+
+            if (status === 'Done') {
+              await github.graphql(`
+                mutation($projectId: ID!, $itemId: ID!) {
+                  archiveProjectV2Item(input: {projectId: $projectId, itemId: $itemId}) {
+                    archivedItem {
+                      id
+                    }
+                  }
+                }
+              `, {
+                projectId: projectId,
+                itemId: issueId
+              });
+            }
