@@ -1,0 +1,53 @@
+name: issueテンプレート
+description: issueテンプレート
+labels: ["運用", "追加", "調査", "改善"]
+projects: "ysk91/3"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        チケット作成にご協力いただきありがとうございます！
+  - type: textarea
+    id: require
+    attributes:
+      label: 要件
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: textarea
+    id: conversation
+    attributes:
+      label: 会話履歴
+      description: Slack等の会話履歴を記入してください
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: dropdown
+    id: env
+    attributes:
+      label: 環境
+      description: どの環境の開発ですか？
+      options:
+        - front
+        - CRM
+        - front & CRM
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com).
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

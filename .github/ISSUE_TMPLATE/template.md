@@ -1,6 +1,6 @@
 ---
-name: issue template
-about: issue template
+name: "issue template"
+about: "issue template"
 labels: 運用
 status: ToDo
 ---
