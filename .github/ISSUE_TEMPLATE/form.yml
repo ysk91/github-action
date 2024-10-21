@@ -71,6 +71,14 @@ body:
         - [ ] 先方確認
         ```
   - type: textarea
+    id: tasks
+    attributes:
+      label: タスクリスト
+      description: 進捗確認用
+      value: |
+        - [ ] タスク1
+        - [ ] タスク2
+  - type: textarea
     id: qa
     attributes:
       label: QA
