@@ -8,7 +8,7 @@ body:
       value: |
         チケット作成にご協力いただきありがとうございます！
         右側のlabelsから該当のものを選択してください。
-        issue作成後はProjectからstatusを選択してください。
+        スケジュールはissue作成後に設定することができます。
   - type: textarea
     id: require
     attributes:
@@ -34,7 +34,7 @@ body:
       label: スケジュール
       description: スケジュール確認要
       value: |
-        <!-- 要件の開始日と、各項目の工数を記入する -->
+        <!-- 要件の開始日、テストレビュー日、各項目の工数を記入する -->
 
         ```mermaid
         gantt
@@ -44,14 +44,14 @@ body:
 
             section 社内
                 要件 :active, a1, 2024-10-10, 10d
-                要件Fix : milestone, m1, after a1, 1day
+                要件Fix : milestone, m1, after a1, 0d
                 開発 :active, a2, after a1, 10d
-                テストレビュー :active, a3, after a2, 3d
-                QA :a4, after a3, 5d
+                テストレビュー : milestone, m2, 2024-10-27, 0d
+                QA :a3, after a2, 5d
             section 社外
-                UAT :active, b1, after a4, 10d
+                UAT :active, b1, after a3, 10d
             section リリース
-                リリース : milestone, m2, after b1, 1d
+                リリース : milestone, m3, after b1, 1d
         ```
   - type: checkboxes
     id: schedules
