@@ -53,28 +53,31 @@ body:
             section リリース
                 リリース : milestone, m3, after b1, 1d
         ```
-  - type: checkboxes
-    id: schedules
+  - type: textarea
+    id: tracks
     attributes:
       label: 進捗
       description: 進捗確認用
-      options:
-        - label: 要件
-          required: false
-        - label: 要件fix
-          required: false
-        - label: 開発
-          required: false
-        - label: テストレビュー
-          required: false
-        - label: QA
-          required: false
-        - label: UAT
-          required: false
-        - label: リリース
-          required: false
-        - label: 先方連絡
-          required: false
+      value: |
+        ```[tasklist]
+        ### タスクリスト
+        - [ ] 要件
+        - [ ] 要件fix
+        - [ ] 開発
+        - [ ] テストレビュー
+        - [ ] QA
+        - [ ] UAT
+        - [ ] リリース
+        - [ ] 先方確認
+        ```
+  - type: textarea
+    id: tasks
+    attributes:
+      label: タスクリスト
+      description: 進捗確認用
+      value: |
+        - [ ] タスク1
+        - [ ] タスク2
   - type: textarea
     id: qa
     attributes:
