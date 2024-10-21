@@ -28,10 +28,35 @@ body:
     attributes:
       value: |
         # これ以降はチケット作成後に記載する内容です
+  - type: textarea
+    id: mermaid
+    attributes:
+      label: スケジュール
+      description: スケジュール確認要
+      value: |
+        <!-- 要件の開始日と、各項目の工数を記入する -->
+
+        ```mermaid
+        gantt
+            title プロジェクト
+            dateFormat  YYYY-MM-DD
+            excludes    weekends
+
+            section 社内
+                要件 :active, a1, 2024-10-10, 10d
+                要件Fix : milestone, m1, after a1, 1day
+                開発 :active, a2, after a1, 10d
+                テストレビュー :active, a3, after a2, 3d
+                QA :a4, after a3, 5d
+            section 社外
+                UAT :active, b1, after a4, 10d
+            section リリース
+                リリース : milestone, m2, after b1, 1d
+        ```
   - type: checkboxes
     id: schedules
     attributes:
-      label: スケジュール
+      label: 進捗
       description: 進捗確認用
       options:
         - label: 要件
