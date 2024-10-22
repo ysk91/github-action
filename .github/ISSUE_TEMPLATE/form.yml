@@ -13,8 +13,8 @@ body:
     id: require
     attributes:
       label: 要件
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
+      description: 要件を記載してください。資料のURLも添付可能です。
+      placeholder: マークダウン記法で入力可能です。
     validations:
       required: true
   - type: textarea
